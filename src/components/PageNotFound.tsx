@@ -2,12 +2,12 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const PageNotFound: React.FC = () => {
+function PageNotFound() {
   const navigate = useNavigate();
 
   return (
     <Box
-      sx={{
+      style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -26,12 +26,12 @@ const PageNotFound: React.FC = () => {
         variant="contained"
         color="primary"
         onClick={() => navigate("/")}
-        sx={{ marginTop: "1rem" }}
+        style={{ marginTop: "1rem" }}
       >
         Go Back to Home
       </Button>
     </Box>
   );
-};
+}
 
 export default PageNotFound;
