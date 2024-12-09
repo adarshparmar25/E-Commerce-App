@@ -5,7 +5,7 @@ import ProductList from "./components/ProductList.tsx";
 import PageNotFound from "./components/PageNotFound.tsx";
 import { CartProvider } from "./context/CartContext.tsx";
 
-const App: React.FC = () => {
+function App() {
   return (
     <CartProvider>
       <Router>
@@ -17,6 +17,6 @@ const App: React.FC = () => {
       </Router>
     </CartProvider>
   );
-};
+}
 
 export default App;

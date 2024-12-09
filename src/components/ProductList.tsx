@@ -16,11 +16,10 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { useDebounce } from "../hooks/useDebounce.ts";
 import { useCart } from "../context/CartContext.tsx";
-import { Product } from "../types/Product.ts";
 
-const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const debouncedSearch = useDebounce(searchTerm, 500);
@@ -55,14 +54,14 @@ const ProductList: React.FC = () => {
   }, [debouncedSearch, allProducts]);
 
   return (
-    <Box sx={{ padding: "2rem" }}>
+    <Box style={{ padding: "2rem" }}>
       <TextField
         fullWidth
         variant="outlined"
         placeholder="Search products..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        sx={{ marginBottom: "2rem" }}
+        style={{ marginBottom: "2rem" }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -73,7 +72,11 @@ const ProductList: React.FC = () => {
       />
       {loading ? (
         <Box
-          sx={{ display: "flex", justifyContent: "center", minHeight: "300px" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            minHeight: "300px",
+          }}
         >
           <CircularProgress />
         </Box>
@@ -82,7 +85,7 @@ const ProductList: React.FC = () => {
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
               <Card
-                sx={{
+                style={{
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -92,30 +95,30 @@ const ProductList: React.FC = () => {
                   component="img"
                   image={product.image}
                   alt={product.title}
-                  sx={{
+                  style={{
                     height: 200,
                     objectFit: "contain",
                     padding: "1rem",
                     backgroundColor: "#f9f9f9",
                   }}
                 />
-                <CardContent sx={{ flexGrow: 1 }}>
+                <CardContent style={{ flexGrow: 1 }}>
                   <Typography
                     gutterBottom
                     variant="h6"
-                    sx={{ textAlign: "center" }}
+                    style={{ textAlign: "center" }}
                   >
                     {product.title}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="text.secondary"
-                    sx={{ textAlign: "center" }}
+                    style={{ textAlign: "center" }}
                   >
                     ₹{product.price.toFixed(2)}
                   </Typography>
                 </CardContent>
-                <CardActions sx={{ justifyContent: "center" }}>
+                <CardActions style={{ justifyContent: "center" }}>
                   <Button
                     size="small"
                     variant="contained"
@@ -132,6 +135,6 @@ const ProductList: React.FC = () => {
       )}
     </Box>
   );
-};
+}
 
 export default ProductList;

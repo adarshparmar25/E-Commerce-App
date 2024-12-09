@@ -12,7 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useCart } from "../context/CartContext.tsx";
 import CartPage from "./Cart.tsx";
 
-const Navbar: React.FC = () => {
+function Navbar() {
   const { cart } = useCart();
   const [isCartOpen, setCartOpen] = useState(false);
 
@@ -23,11 +23,15 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static" color="primary" sx={{ padding: "0 2rem" }}>
+      <AppBar position="static" color="primary" style={{ padding: "0 2rem" }}>
         <Toolbar>
           <Typography
             variant="h6"
-            sx={{ flexGrow: 1, textDecoration: "none", color: "inherit" }}
+            style={{
+              flexGrow: 1,
+              textDecoration: "none",
+              color: "inherit",
+            }}
           >
             E-Commerce App
           </Typography>
@@ -47,6 +51,6 @@ const Navbar: React.FC = () => {
       </Drawer>
     </>
   );
-};
+}
 
 export default Navbar;

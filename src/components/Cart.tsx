@@ -11,18 +11,14 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { useCart } from "../context/CartContext.tsx";
 
-interface CartPageProps {
-  onClose: () => void;
-}
-
-const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
+function Cart({ onClose }) {
   const { cart, totalAmount, updateQuantity } = useCart();
 
   const renderCartItems = () =>
     cart.map((item) => (
       <Paper
         key={item.id}
-        sx={{
+        style={{
           padding: "1rem",
           marginBottom: "1rem",
           display: "flex",
@@ -34,27 +30,27 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
           component="img"
           image={item.image}
           alt={item.title}
-          sx={{
+          style={{
             height: 100,
             width: 100,
             objectFit: "contain",
             borderRadius: "4px",
           }}
         />
-        <Box sx={{ flex: 1 }}>
+        <Box style={{ flex: 1 }}>
           <Typography variant="h6">{item.title}</Typography>
           <Typography variant="body2" color="textSecondary">
             Price: ₹{item.price.toFixed(2)}
           </Typography>
           <Typography
             variant="body2"
-            sx={{ marginTop: "0.5rem", fontWeight: "bold" }}
+            style={{ marginTop: "0.5rem", fontWeight: "bold" }}
           >
             Quantity: {item.quantity}
           </Typography>
-          <Divider sx={{ marginY: "0.5rem" }} />
+          <Divider style={{ margin: "0.5rem 0" }} />
           <Box
-            sx={{
+            style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -67,15 +63,15 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
               <Button
                 size="small"
                 variant="outlined"
-                onClick={() => updateQuantity(item.id, item.quantity! - 1)}
-                sx={{ marginRight: "0.5rem" }}
+                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                style={{ marginRight: "0.5rem" }}
               >
                 -
               </Button>
               <Button
                 size="small"
                 variant="outlined"
-                onClick={() => updateQuantity(item.id, item.quantity! + 1)}
+                onClick={() => updateQuantity(item.id, item.quantity + 1)}
               >
                 +
               </Button>
@@ -87,8 +83,9 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
 
   return (
     <Box
-      sx={{
-        width: { xs: "100vw", sm: 400 },
+      style={{
+        width: "100vw",
+        maxWidth: 400,
         height: "100%",
         display: "flex",
         flexDirection: "column",
@@ -96,27 +93,27 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
       }}
     >
       <Box
-        sx={{
+        style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           padding: "1rem",
-          backgroundColor: "primary.main",
+          backgroundColor: "#3f51b5",
           color: "white",
         }}
       >
         <Typography variant="h5">Your Shopping Cart</Typography>
-        <IconButton onClick={onClose} color="inherit">
+        <IconButton onClick={onClose} style={{ color: "inherit" }}>
           <CloseIcon />
         </IconButton>
       </Box>
 
-      <Box sx={{ padding: "1rem", flex: 1, overflowY: "auto" }}>
+      <Box style={{ padding: "1rem", flex: 1, overflowY: "auto" }}>
         {cart.length === 0 ? (
           <Typography
             variant="h6"
             align="center"
-            sx={{ marginTop: "2rem", textAlign: "center" }}
+            style={{ marginTop: "2rem", textAlign: "center" }}
           >
             Your cart is empty. Start shopping now!
           </Typography>
@@ -126,7 +123,7 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
       </Box>
 
       <Box
-        sx={{
+        style={{
           padding: "1rem",
           borderTop: "1px solid #e0e0e0",
           backgroundColor: "white",
@@ -135,7 +132,7 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Order Summary
         </Typography>
-        <Divider sx={{ marginY: "1rem" }} />
+        <Divider style={{ margin: "1rem 0" }} />
         <Typography variant="body1" gutterBottom>
           Total Items:{" "}
           {cart.reduce((sum, item) => sum + (item.quantity || 1), 0)}
@@ -148,13 +145,13 @@ const CartPage: React.FC<CartPageProps> = ({ onClose }) => {
           color="primary"
           size="large"
           fullWidth
-          sx={{ marginTop: "1rem" }}
+          style={{ marginTop: "1rem" }}
         >
           Proceed to Checkout
         </Button>
       </Box>
     </Box>
   );
-};
+}
 
-export default CartPage;
+export default Cart;
